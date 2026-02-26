@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="screen_timeout_entries">
+        <item>@string/screen_timeout_val_5</item>
+        <item>@string/screen_timeout_val_10</item>
+        <item>@string/screen_timeout_val_20</item>
+        <item>@string/screen_timeout_val_30</item>
+        <item>@string/screen_timeout_val_45</item>
+        <item>@string/screen_timeout_val_60</item>
+    </string-array>
+
+    <string-array name="screen_timeout_vals">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+    </string-array>
+</resources>

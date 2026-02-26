@@ -1,5 +1,27 @@
 <resources>
+    [App]
     <string name="app_name">Final Project</string>
 
+    
+    
+
+    [Preferences]
+        <string name="settings_page_title">Settings</string>
+        [Dark Mode]
+            <string name="dark_mode_title">Dark Mode</string>
+            <string name="dark_mode_pref_summary">Turn dark mode on or off</string>
+        [Audio]
+            <string name="audio_title">Mute</string>
+            <string name="audio_summary">Mute or unmute audio</string>
+        [Screen Timeout]
+            <string name="screen_timeout_title">Screen Timeout</string>
+            <string name="screen_timeout_val_5">5</string>
+            <string name="screen_timeout_val_10">10</string>
+            <string name="screen_timeout_val_20">20</string>
+            <string name="screen_timeout_val_30">30</string>
+            <string name="screen_timeout_val_45">45</string>
+            <string name="screen_timeout_val_60">60</string>
+    
+    
 
 </resources>
