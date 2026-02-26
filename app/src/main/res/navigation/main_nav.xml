@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav">
+    android:id="@+id/main_nav"
+    app:startDestination="@id/home_page">
+    <fragment
+        android:id="@+id/home_page"
+        android:label="@string/home_page_title"
+        android:name="edu.oregonstate.cs492.assignmentfinal.ui.homeFragment">
+    </fragment>
+    <fragment
+        android:id="@+id/daily_page"
+        android:label="@string/daily_page_title"
+        android:name="edu.oregonstate.cs492.assignmentfinal.ui.dailyFragment">
+    </fragment>
+    <fragment
+        android:id="@+id/endless_page"
+        android:label="@string/endless_page_title"
+        android:name="edu.oregonstate.cs492.assignmentfinal.ui.endlessFragment">
+    </fragment>
+    <fragment
+        android:id="@+id/settings_page"
+        android:label="@string/settings_page_title"
+        android:name="edu.oregonstate.cs492.assignmentfinal.ui.settingsFragment">
+    </fragment>
 
 </navigation>

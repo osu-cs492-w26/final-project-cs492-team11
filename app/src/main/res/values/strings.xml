@@ -1,9 +1,17 @@
 <resources>
     [App]
-    <string name="app_name">Final Project</string>
+        <string name="app_name">Final Project</string>
 
-    
-    
+    [Home Page]
+        <string name="home_page_title" translatable="false">GameFound™</string>
+        <string name="daily_button">Daily</string>
+        <string name="endless_button">Endless</string>
+
+    [Daily Page]
+        <string name="daily_page_title">Daily Game</string>
+
+    [Endless Page]
+        <string name="endless_page_title">Endless Mode</string>
 
     [Preferences]
         <string name="settings_page_title">Settings</string>
