@@ -7,6 +7,7 @@
         <item>@string/screen_timeout_val_30</item>
         <item>@string/screen_timeout_val_45</item>
         <item>@string/screen_timeout_val_60</item>
+        <item>@string/screen_timeout_val_300</item>
     </string-array>
 
     <string-array name="screen_timeout_vals">
@@ -16,5 +17,6 @@
         <item>30</item>
         <item>45</item>
         <item>60</item>
+        <item>300</item>
     </string-array>
 </resources>

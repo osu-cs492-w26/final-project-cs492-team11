@@ -14,7 +14,7 @@
     <ListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout_title"
-        android:defaultValue="5"
+        android:defaultValue="30"
         android:entries="@array/screen_timeout_entries"
         android:entryValues="@array/screen_timeout_vals"
         app:useSimpleSummaryProvider="true"/>

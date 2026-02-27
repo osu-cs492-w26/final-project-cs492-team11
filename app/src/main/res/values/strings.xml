@@ -23,12 +23,13 @@
             <string name="audio_summary">Mute or unmute audio</string>
         [Screen Timeout]
             <string name="screen_timeout_title">Screen Timeout</string>
-            <string name="screen_timeout_val_5">5</string>
-            <string name="screen_timeout_val_10">10</string>
-            <string name="screen_timeout_val_20">20</string>
-            <string name="screen_timeout_val_30">30</string>
-            <string name="screen_timeout_val_45">45</string>
-            <string name="screen_timeout_val_60">60</string>
+            <string name="screen_timeout_val_5">5 Seconds</string>
+            <string name="screen_timeout_val_10">10 Seconds</string>
+            <string name="screen_timeout_val_20">20 Seconds</string>
+            <string name="screen_timeout_val_30">30 Seconds</string>
+            <string name="screen_timeout_val_45">45 Seconds</string>
+            <string name="screen_timeout_val_60">60 Seconds</string>
+            <string name="screen_timeout_val_300">5 Minutes</string>
     
     
 
