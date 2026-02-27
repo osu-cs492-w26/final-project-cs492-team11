@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <CheckBoxPreference
         android:title="@string/dark_mode_title"
         android:summary="@string/dark_mode_pref_summary"
@@ -10,11 +11,12 @@
         android:summary="@string/audio_summary"
         android:key="audio_enabled"
         android:defaultValue="true" />
-    <DropDownPreference
+    <ListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout_title"
         android:defaultValue="5"
         android:entries="@array/screen_timeout_entries"
-        android:entryValues="@array/screen_timeout_vals" />
+        android:entryValues="@array/screen_timeout_vals"
+        app:useSimpleSummaryProvider="true"/>
 
 </androidx.preference.PreferenceScreen>

@@ -7,6 +7,15 @@
         android:id="@+id/home_page"
         android:label="@string/home_page_title"
         android:name="edu.oregonstate.cs492.assignmentfinal.ui.homeFragment">
+        <action
+            android:id="@+id/navigate_to_daily"
+            app:destination="@+id/daily_page"/>
+        <action
+            android:id="@+id/navigate_to_endless"
+            app:destination="@+id/endless_page" />
+        <action
+            android:id="@+id/navigate_to_settings"
+            app:destination="@+id/settings_page"/>
     </fragment>
     <fragment
         android:id="@+id/daily_page"
