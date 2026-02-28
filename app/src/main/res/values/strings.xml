@@ -14,6 +14,7 @@
     [Endless Page]
         <string name="endless_page_title">Endless Mode</string>
         <string name="endless_puzzle_title">Puzzle #%1$d</string>
+        <string name="endless_skip_button">Skip</string>
 
     [General]
         <string name="guess_hint_text">Guess your game</string>
