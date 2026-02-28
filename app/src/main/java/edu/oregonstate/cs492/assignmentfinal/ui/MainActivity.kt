@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val topAppBar: MaterialToolbar = findViewById(R.id.top_app_bar)
         setSupportActionBar(topAppBar)
         setupActionBarWithNavController(navController, appBarConfig)
-        }
+    }
 
     override fun onResume() {
         super.onResume()

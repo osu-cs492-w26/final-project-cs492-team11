@@ -1,6 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="10dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline65horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline75horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline80horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline90horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline50horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <TextView
+        android:id="@+id/daily_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textSize="32sp"
+        android:text="Daily #"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline15horizontal"/>
+
+    <!-- Image clue -->
+    <ImageView
+        android:id="@+id/image_clue"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/guideline15horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guideline65horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Text clue -->
+    <TextView
+        android:id="@+id/text_clue"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Clue goes here"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:background="@color/material_dynamic_neutral_variant90"
+        app:layout_constraintTop_toBottomOf="@id/guideline15horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guideline65horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Clue Text Label -->
+    <TextView
+        android:id="@+id/clue_text_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="@string/clue_label"
+        app:layout_constraintTop_toBottomOf="@id/guideline65horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guideline75horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Back arrow -->
+    <ImageButton
+        android:id="@+id/clue_back_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/rounded_arrow_back_24"
+        android:contentDescription="@string/back_arrow_description"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@id/clue_text_label"
+        app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline50horizontal" />
+
+    <!-- Forward arrow -->
+    <ImageButton
+        android:id="@+id/clue_forward_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/rounded_arrow_forward_24"
+        android:contentDescription="@string/forward_arrow_description"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@id/clue_text_label"
+        app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
+        app:layout_constraintStart_toEndOf="@id/guideline50horizontal"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Clue label -->
+    <TextView
+        android:id="@+id/clue_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="5"
+        app:layout_constraintTop_toBottomOf="@id/clue_text_label"
+        app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/game_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/guess_hint_text"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/guideline80horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guideline90horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/guess_confirm_button_text"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/guideline90horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

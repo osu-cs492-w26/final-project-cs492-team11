@@ -9,9 +9,20 @@
 
     [Daily Page]
         <string name="daily_page_title">Daily Game</string>
+        <string name="daily_puzzle_title">Daily #%1$d</string>
 
     [Endless Page]
         <string name="endless_page_title">Endless Mode</string>
+        <string name="endless_puzzle_title">Puzzle #%1$d</string>
+
+    [General]
+        <string name="guess_hint_text">Guess your game</string>
+        <string name="guess_confirm_button_text">Confirm</string>
+        <string name="correct_guess_text">CORRECT!</string>
+        <string name="incorrect_guess_text">INCORRECT</string>
+        <string name="clue_label">Clue</string>
+        <string name="back_arrow_description">Go to previous clue</string>
+        <string name="forward_arrow_description">Go to next clue</string>
 
     [Preferences]
         <string name="settings_page_title">Settings</string>
