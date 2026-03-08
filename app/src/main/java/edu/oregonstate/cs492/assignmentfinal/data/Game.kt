@@ -4,36 +4,34 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Game(
-    val name: String, // Name of Game
-    val metacritic: Int, // Metacritic Score
-    val released: String, // Release date in YYYY/MM/DD format
-    val website: String, // Website of game
-    val developers: List<Developer>, // List of all developers on the game
-    val genres: List<Genre>, // List of genres the game is a part of
-    // Commiting tags (some random tags the game has) but I can add it if you want
-    val publishers: List<Publisher>,
-    val esrbRating: ESRBRating, // ESRB Rating (age rating)
+    val name: String? = null,
+    val metacritic: Int? = null,
+    val released: String? = null,
+    val website: String? = null,
+    val developers: List<Developer>? = null,
+    val genres: List<Genre>? = null,
+    val publishers: List<Publisher>? = null,
+    val esrbRating: ESRBRating? = null,
 )
 
 @JsonClass(generateAdapter = true)
 data class Developer(
-    val name: String, // Name of developer
-    val gamesCount: Int // Number of games developer has made
+    val name: String? = null,
+    val gamesCount: Int? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class Genre(
-    val name: String // Name of Genre
+    val name: String? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class Publisher(
-    val name: String, // Name of publisher
-    val gamesCount: Int // Number of games publisher has made
+    val name: String? = null,
+    val gamesCount: Int? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class ESRBRating(
-    val name: String // "Name" of ESRB Rating
+    val name: String? = null
 )
-
