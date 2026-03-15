@@ -36,11 +36,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
         gameViewModel.screenshots.observe(viewLifecycleOwner) { screenshots ->
             val firstPhotoUrl = screenshots?.photos?.firstOrNull()?.image
-            Log.d(tag, firstPhotoUrl + "")
-
 
             if (firstPhotoUrl != null) {
-                // 2. Use Glide to load the URL into your ImageView
                 Glide.with(this)
                     .load(firstPhotoUrl)
                     // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image

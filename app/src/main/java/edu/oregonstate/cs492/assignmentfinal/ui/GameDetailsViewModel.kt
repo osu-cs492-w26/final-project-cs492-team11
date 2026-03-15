@@ -44,10 +44,8 @@ class GameDetailsViewModel : ViewModel() {
 
             if (screenshotsResult.isSuccess) {
                 _screenshots.value = screenshotsResult.getOrNull()
-                Log.d("ViewModel", "Screenshots are good or smth")
             } else if (_error.value == null) { // Update error value only if main one did not
                 _error.value = screenshotsResult.exceptionOrNull()
-                Log.d("ViewModel", "Screenshots are bad or smth" + _error.value)
             }
         }
     }
