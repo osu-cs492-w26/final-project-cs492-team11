@@ -10,7 +10,7 @@
         android:title="@string/audio_title"
         android:summary="@string/audio_summary"
         android:key="audio_enabled"
-        android:defaultValue="true" />
+        android:defaultValue="false" />
     <ListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout_title"
