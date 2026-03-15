@@ -15,6 +15,12 @@ interface RAWGService {
         @Query("key") key: String
     ) : Response<Game>
 
+    @GET("games/{id}/screenshots")
+    suspend fun loadScreenshots(
+        @Path("id") slug: String,
+        @Query("key") key: String
+    ) : Response<GameScreenshots>
+
 
     companion object {
         private const val BASE_URL = "https://api.rawg.io/api/"
