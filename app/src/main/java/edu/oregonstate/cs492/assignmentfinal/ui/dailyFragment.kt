@@ -1,21 +1,24 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
+import GameDetailsViewModel
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import edu.oregonstate.cs492.assignmentfinal.R
 import java.io.File
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import java.util.Calendar
 import kotlin.random.Random
 
 
 class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
-    private val viewModel: SingleGameViewModel by viewModels()
+    private val gameViewModel: GameDetailsViewModel by viewModels()
 
     private val tag = "DailyFragment"
 
@@ -23,12 +26,28 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val TVName = view.findViewById<TextView>(R.id.daily_name)
+        val IVClue = view.findViewById<ImageView>(R.id.image_clue)
 
-        viewModel.game.observe(viewLifecycleOwner) { game ->
+        gameViewModel.game.observe(viewLifecycleOwner) { game ->
             if (game != null) {
                 TVName.text = game.name ?: "Error: Unknown Game"
             }
         }
+
+        gameViewModel.screenshots.observe(viewLifecycleOwner) { screenshots ->
+            val firstPhotoUrl = screenshots?.photos?.firstOrNull()?.image
+
+            if (firstPhotoUrl != null) {
+                Glide.with(this)
+                    .load(firstPhotoUrl)
+                    // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
+                    // .error(R.drawable.ic_error_image)               // TODO Error image
+                    .into(IVClue)
+            }
+        }
+
+
+        // TODO: Loading/Error Functionality
 
     }
 
@@ -72,7 +91,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
                 Log.d(tag, "Game Chosen: " + gameObject[0])
 
-                viewModel.loadSingleGame(
+                gameViewModel.loadGameData(
                     gameObject[0],
                     getString(R.string.rawg_api_key)
                 )
