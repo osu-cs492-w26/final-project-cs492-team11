@@ -5,6 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -27,6 +29,21 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
         val TVName = view.findViewById<TextView>(R.id.daily_name)
         val IVClue = view.findViewById<ImageView>(R.id.image_clue)
+        // AutoComplete Text View Input
+        val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
+
+        // Setup AutoComplete
+        val input = requireContext().assets.open("games.txt")
+        val lines = input.bufferedReader().readLines()
+        val items = lines.map { line ->
+            line.split("|")[1]
+        }
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
+        ACTVInput.setAdapter(adapter)
+        // Two characters have to be typed
+        ACTVInput.threshold = 2
+
+
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
             if (game != null) {

@@ -128,7 +128,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
+    <!-- Autofilling dropdown -->
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/game_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -137,7 +138,18 @@
         app:layout_constraintTop_toBottomOf="@id/guideline80horizontal"
         app:layout_constraintBottom_toTopOf="@id/guideline90horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:dropDownHeight="200dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <Button
         android:id="@+id/submit_button"
         android:layout_width="0dp"
