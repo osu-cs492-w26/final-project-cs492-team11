@@ -27,6 +27,18 @@ class GameDetailsViewModel : ViewModel() {
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
 
+    private val _gameCompleted = MutableLiveData<Boolean>(false)
+    val gameCompleted: LiveData<Boolean> get() = _gameCompleted
+
+    fun completeGame() {
+        _gameCompleted.value = true
+    }
+
+    fun resetCompletion() {
+        _gameCompleted.value = false
+    }
+
+
     fun loadGameData(slug: String, key: String) {
         viewModelScope.launch {
             _loading.value = true

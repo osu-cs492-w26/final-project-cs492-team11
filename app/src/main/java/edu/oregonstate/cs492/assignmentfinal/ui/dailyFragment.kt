@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -14,6 +16,7 @@ import edu.oregonstate.cs492.assignmentfinal.R
 import java.io.File
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -26,6 +29,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Preferences for game
+        val prefs = requireContext().getSharedPreferences("daily_game", Context.MODE_PRIVATE)
 
         val TVName = view.findViewById<TextView>(R.id.daily_name)
         val IVClue = view.findViewById<ImageView>(R.id.image_clue)
@@ -43,6 +48,33 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         // Two characters have to be typed
         ACTVInput.threshold = 2
 
+
+        // Clue Buttons
+        val rightArrow: ImageButton = view.findViewById(R.id.clue_forward_arrow)
+        val leftArrow: ImageButton = view.findViewById(R.id.clue_back_arrow)
+
+        rightArrow.setOnClickListener {
+
+        }
+        leftArrow.setOnClickListener {
+
+        }
+
+
+        // Confirm Button
+
+        val confirmButton: Button = view.findViewById(R.id.submit_button)
+        // Takes the answer from the text box and the game stored in last_game and compares then wins the game if true
+        confirmButton.setOnClickListener {
+            val currentGame: String? = prefs.getString("current_game", null)
+            val answer = view.findViewById<TextInputLayout>(R.id.game_input)
+                .editText?.text.toString().trim()
+
+            if (currentGame != null && answer == currentGame) {
+                gameViewModel.completeGame()
+                Log.d(tag, "right answer")
+            }
+        }
 
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
@@ -68,6 +100,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
     }
 
+
+    // Seeds the Daily game and initiates a network call for that game
     override fun onStart() {
         super.onStart()
 
@@ -94,7 +128,9 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                         val picked = remainingLines.random(Random(seed))
 
                         usedGames.add(picked)
+                        val currentGame = picked.split("|")
                         prefs.edit()
+                            .putString("current_game", currentGame[1])
                             .putString("last_date", today)
                             .putString("last_game", picked)
                             .putStringSet("used_games", usedGames)
@@ -102,6 +138,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                         picked
                     }
                 }
+
 
                 val randomGame = chosenGame.toString()
                 val gameObject = randomGame.split("|")
