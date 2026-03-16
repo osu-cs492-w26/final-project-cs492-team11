@@ -1,9 +1,6 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -11,9 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import edu.oregonstate.cs492.assignmentfinal.R
 
 class gameResultFragment : Fragment(R.layout.game_result_fragment) {
@@ -22,10 +17,11 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
     private val tag = "GameResultFragment"
 
+    private var currentHint = 1
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // all components in UI
         val outcomeTV = view.findViewById<TextView>(R.id.guess_outcome_text)
         val gameNameTV = view.findViewById<TextView>(R.id.game_name)
         val scoreTV = view.findViewById<TextView>(R.id.score_text)
@@ -43,10 +39,8 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         val result = gameViewModel.guessResult.value
         val game = gameViewModel.game.value
         val screenshots = gameViewModel.screenshots.value
+        val mode = arguments?.getString("mode") ?: "daily"
 
-        val mode = arguments?.getString("mode") ?: "daily" // daily / endless
-
-        // Guess result
         outcomeTV.text = when (result) {
             GuessResult.CORRECT -> getString(R.string.correct_guess_text)
             GuessResult.INCORRECT -> getString(R.string.incorrect_guess_text)
@@ -76,14 +70,25 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
             scoreTV.visibility = View.GONE
         }
 
-        // Hint Arrows
+        fun updateClue() {
+            clueNumberTV.text = getString(R.string.clue_number, currentHint, gameViewModel.maxHints)
+        }
+
         backArrow.setOnClickListener {
-            // Implement later
+            if (currentHint > 1) {
+                currentHint -= 1
+                updateClue()
+            }
         }
 
         forwardArrow.setOnClickListener {
-            // Implement later
+            if (currentHint < gameViewModel.maxHints) {
+                currentHint += 1
+                updateClue()
+            }
         }
+
+        updateClue()
 
         visitButton.setOnClickListener {
             // Implement later
@@ -107,3 +112,4 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         }
     }
 }
+
