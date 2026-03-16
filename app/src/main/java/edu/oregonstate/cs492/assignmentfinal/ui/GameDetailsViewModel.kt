@@ -2,6 +2,7 @@ package edu.oregonstate.cs492.assignmentfinal.ui
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import edu.oregonstate.cs492.assignmentfinal.data.Game
 import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
@@ -14,8 +15,6 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
 
     private val gameRepo = SingleGameRepository(RAWGService.create())
     private val screenshotRepo = GameScreenshotsRepository(RAWGService.create())
-
-    private val prefs = application.getSharedPreferences("daily_game", Context.MODE_PRIVATE)
 
     private val _game = MutableLiveData<Game?>(null)
     val game: LiveData<Game?> = _game
@@ -74,6 +73,7 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
         } else {
             _guessResult.value = GuessResult.INCORRECT
         }
+        Log.d("Guess", _guessResult.value.toString())
     }
 
     fun resetCompletion() {

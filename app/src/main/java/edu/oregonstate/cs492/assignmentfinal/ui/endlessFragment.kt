@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import edu.oregonstate.cs492.assignmentfinal.R
 import java.io.File
 import androidx.fragment.app.viewModels
@@ -20,7 +21,7 @@ import java.util.Calendar
 import kotlin.random.Random
 
 class endlessFragment : Fragment(R.layout.endless_game_page) {
-    private val gameViewModel: GameDetailsViewModel by viewModels()
+    private val gameViewModel: GameDetailsViewModel by activityViewModels()
 
 
     private val tag = "Endless Fragment"

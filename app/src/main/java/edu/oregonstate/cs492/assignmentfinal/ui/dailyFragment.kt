@@ -11,9 +11,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import edu.oregonstate.cs492.assignmentfinal.R
 import java.io.File
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputLayout
@@ -23,7 +25,7 @@ import kotlin.random.Random
 
 class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
-    private val gameViewModel: GameDetailsViewModel by viewModels()
+    private val gameViewModel: GameDetailsViewModel by activityViewModels()
 
     private val tag = "DailyFragment"
 
@@ -71,6 +73,11 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             val guess = view.findViewById<TextInputLayout>(R.id.game_input)
                 .editText?.text.toString().trim()
             gameViewModel.submitGuess(guess)
+            // let the game result page know what page it just came from
+            val bundle = Bundle().apply {
+                putString("mode", "daily")
+            }
+            findNavController().navigate(R.id.action_daily_to_result, bundle)
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
@@ -88,24 +95,6 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                     // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
                     // .error(R.drawable.ic_error_image)               // TODO Error image
                     .into(IVClue)
-            }
-        }
-
-        // looks for changes in the guess result and then takes action
-        gameViewModel.guessResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                GuessResult.CORRECT -> {
-                    Log.d("DailyFragment", "GuessResult: CORRECT")
-                }
-                GuessResult.INCORRECT -> {
-                    Log.d("DailyFragment", "GuessResult: INCORRECT")
-                }
-                GuessResult.EMPTY -> {
-                    Log.d("DailyFragment", "GuessResult: EMPTY")
-                }
-                else -> {
-                    Log.d("DailyFragment", "GuessResult: null or unknown")
-                }
             }
         }
 

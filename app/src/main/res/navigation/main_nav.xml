@@ -21,16 +21,34 @@
         android:id="@+id/daily_page"
         android:label="@string/daily_page_title"
         android:name="edu.oregonstate.cs492.assignmentfinal.ui.dailyFragment">
+        <action
+            android:id="@+id/action_daily_to_result"
+            app:destination="@id/game_result_page" />
     </fragment>
     <fragment
         android:id="@+id/endless_page"
         android:label="@string/endless_page_title"
         android:name="edu.oregonstate.cs492.assignmentfinal.ui.endlessFragment">
+        <action
+            android:id="@+id/action_endless_to_result"
+            app:destination="@id/game_result_page" />
+    </fragment>
+    <fragment
+        android:id="@+id/game_result_page"
+        android:label="@string/game_result_title"
+        android:name="edu.oregonstate.cs492.assignmentfinal.ui.gameResultFragment">
+        <action
+            android:id="@+id/navigate_to_home"
+            app:destination="@+id/home_page" />
+        <action
+            android:id="@+id/go_to_next_endless"
+            app:destination="@+id/endless_page" />
     </fragment>
     <fragment
         android:id="@+id/settings_page"
         android:label="@string/settings_page_title"
         android:name="edu.oregonstate.cs492.assignmentfinal.ui.settingsFragment">
     </fragment>
+
 
 </navigation>
