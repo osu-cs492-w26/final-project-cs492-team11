@@ -15,16 +15,19 @@ import androidx.fragment.app.activityViewModels
 import edu.oregonstate.cs492.assignmentfinal.R
 import java.io.File
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import java.util.Calendar
 import kotlin.random.Random
 
 class endlessFragment : Fragment(R.layout.endless_game_page) {
+
     private val gameViewModel: GameDetailsViewModel by activityViewModels()
 
-
     private val tag = "Endless Fragment"
+
+    private var currentHint = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,12 +36,11 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val TVName = view.findViewById<TextView>(R.id.endless_name)
         val IVClue = view.findViewById<ImageView>(R.id.image_clue)
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
+        val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
 
         val input = requireContext().assets.open("games.txt")
         val lines = input.bufferedReader().readLines()
-        val items = lines.map { line ->
-            line.split("|")[1]
-        }
+        val items = lines.map { line -> line.split("|")[1] }
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
         ACTVInput.setAdapter(adapter)
         // Two characters have to be typed
@@ -49,10 +51,18 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val leftArrow: ImageButton = view.findViewById(R.id.clue_back_arrow)
 
         rightArrow.setOnClickListener {
-
+            val maxUnlocked = gameViewModel.hintIndex.value ?: 1
+            if (currentHint < maxUnlocked) {
+                currentHint += 1
+            }
+            updateClueNumber()
         }
-        leftArrow.setOnClickListener {
 
+        leftArrow.setOnClickListener {
+            if (currentHint > 1) {
+                currentHint -= 1
+            }
+            updateClueNumber()
         }
 
         // Confirm Button
@@ -64,16 +74,14 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             gameViewModel.submitGuess(guess)
         }
 
-        // Loads the next game for endless mode
-        gameViewModel.gameCompleted.observe(viewLifecycleOwner){ completed ->
-            if (completed){
-                loadNextGame()
-                gameViewModel.resetCompletion()
+        gameViewModel.gameCompleted.observe(viewLifecycleOwner) { completed ->
+            if (completed) {
+                val bundle = Bundle().apply {
+                    putString("mode", "endless")
+                }
+                findNavController().navigate(R.id.action_endless_to_result, bundle)
             }
-
         }
-
-        // Skip Button
 
         val skipButton: Button = view.findViewById(R.id.skip_button)
 
@@ -99,11 +107,18 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             }
         }
 
+        gameViewModel.hintIndex.observe(viewLifecycleOwner) { index ->
+            currentHint = index
+            updateClueNumber()
+        }
     }
+
     override fun onStart() {
         super.onStart()
+        currentHint = 1
         loadNextGame()
     }
+
     fun loadNextGame() {
         try {
             val input = requireContext().assets.open("games.txt")
@@ -134,5 +149,12 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         }
     }
 
-
+    private fun updateClueNumber() {
+        val TVClueNumber = view?.findViewById<TextView>(R.id.clue_number) ?: return
+        TVClueNumber.text = getString(
+            R.string.clue_number,
+            currentHint,
+            gameViewModel.maxHints
+        )
+    }
 }

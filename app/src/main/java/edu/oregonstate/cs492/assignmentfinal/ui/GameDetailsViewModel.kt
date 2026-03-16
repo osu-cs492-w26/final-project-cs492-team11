@@ -34,9 +34,15 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
     private val _guessResult = MutableLiveData<GuessResult?>(null)
     val guessResult: LiveData<GuessResult?> = _guessResult
 
+    private val _hintIndex = MutableLiveData(1)
+    val hintIndex: LiveData<Int> = _hintIndex
+
+    val maxHints = 5
+
     private var correctAnswer: String? = null
 
     fun loadGameData(slug: String, key: String) {
+        resetCompletion()
         viewModelScope.launch {
             _loading.value = true
 
@@ -72,13 +78,31 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
             _gameCompleted.value = true
         } else {
             _guessResult.value = GuessResult.INCORRECT
+            incrementHint()
+
+            if ((_hintIndex.value ?: 0) > maxHints) {
+                _gameCompleted.value = true
+            }
         }
         Log.d("Guess", _guessResult.value.toString())
     }
 
     fun resetCompletion() {
+        _game.value = null
+        _screenshots.value = null
+        _error.value = null
+        _loading.value = false
         _gameCompleted.value = false
         _guessResult.value = null
+        _hintIndex.value = 1
+        correctAnswer = null
+    }
+
+    fun incrementHint() {
+        val current = _hintIndex.value ?: 1
+        if (current <= maxHints) {
+            _hintIndex.value = current + 1
+        }
     }
 }
 

@@ -32,6 +32,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
     private lateinit var loadingErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
 
+    private var currentHint = 1
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Preferences for game
@@ -42,6 +44,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         // AutoComplete Text View Input
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val confirmButton: Button = view.findViewById(R.id.submit_button)
+
+        val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
 
         val rightArrow: ImageButton = view.findViewById(R.id.clue_forward_arrow)
         val leftArrow: ImageButton = view.findViewById(R.id.clue_back_arrow)
@@ -61,11 +65,20 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         ACTVInput.threshold = 2
 
         rightArrow.setOnClickListener {
-
+            val maxUnlocked = gameViewModel.hintIndex.value ?: 1
+            if (currentHint < maxUnlocked) {
+                currentHint += 1
+            }
+            updateClueNumber()
         }
+
         leftArrow.setOnClickListener {
-
+            if (currentHint > 1) {
+                currentHint -= 1
+            }
+            updateClueNumber()
         }
+
 
         // Confirm Button
         // Takes the answer from the text box and the game stored in last_game and compares then wins the game if true
@@ -73,16 +86,20 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             val guess = view.findViewById<TextInputLayout>(R.id.game_input)
                 .editText?.text.toString().trim()
             gameViewModel.submitGuess(guess)
-            // let the game result page know what page it just came from
-            val bundle = Bundle().apply {
-                putString("mode", "daily")
-            }
-            findNavController().navigate(R.id.action_daily_to_result, bundle)
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
             if (game != null) {
                 TVName.text = game.name ?: "Error: Unknown Game"
+            }
+        }
+
+        gameViewModel.gameCompleted.observe(viewLifecycleOwner) { completed ->
+            if (completed) {
+                val bundle = Bundle().apply {
+                    putString("mode", "daily")
+                }
+                findNavController().navigate(R.id.action_daily_to_result, bundle)
             }
         }
 
@@ -98,6 +115,13 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             }
         }
 
+        // Updates the current hint to be newest one when guessing
+        gameViewModel.hintIndex.observe(viewLifecycleOwner) { index ->
+            currentHint = index
+            updateClueNumber()
+        }
+
+        // Loading
         gameViewModel.loading.observe(viewLifecycleOwner) { loading ->
             if (loading) {
                 loadingIndicator.visibility = View.VISIBLE
@@ -107,6 +131,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             }
         }
 
+        // Error
         gameViewModel.error.observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 loadingErrorTV.text = getString(R.string.loading_error, error.message)
@@ -178,5 +203,15 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val seed = (year * 10000 + month * 100 + day).toLong()
         return seed
+    }
+
+    private fun updateClueNumber() {
+        val TVClueNumber = view?.findViewById<TextView>(R.id.clue_number) ?: return
+
+        TVClueNumber.text = getString(
+            R.string.clue_number,
+            currentHint,
+            gameViewModel.maxHints
+        )
     }
 }

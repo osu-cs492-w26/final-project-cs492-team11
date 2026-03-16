@@ -31,6 +31,7 @@
         <string name="correct_guess_text">CORRECT!</string>
         <string name="incorrect_guess_text">INCORRECT</string>
         <string name="clue_label">Clue</string>
+        <string name="clue_number">Clue %1$d/%2$d</string>
         <string name="back_arrow_description">Go to previous clue</string>
         <string name="forward_arrow_description">Go to next clue</string>
         <string name="loading_error">Unable to fetch game data.  Error message: %1$s</string>

@@ -22,9 +22,6 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
     private val tag = "GameResultFragment"
 
-    private var clueList: List<String> = emptyList()
-    private var clueIndex = 0
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,10 +48,22 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
         // Guess result
         outcomeTV.text = when (result) {
-            GuessResult.CORRECT -> "CORRECT!"
-            GuessResult.INCORRECT -> "INCORRECT"
+            GuessResult.CORRECT -> getString(R.string.correct_guess_text)
+            GuessResult.INCORRECT -> getString(R.string.incorrect_guess_text)
             else -> ""
         }
+
+        // Nav button text
+        if (mode == "daily") {
+            nextButton.text = getString(R.string.daily_game_done_button)
+        } else {
+            if (result == GuessResult.CORRECT) {
+                nextButton.text = getString(R.string.endless_next_button)
+            } else {
+                nextButton.text = getString(R.string.daily_game_done_button)
+            }
+        }
+
 
         // Game name
         gameNameTV.text = game?.name ?: "Unknown Game"
@@ -81,11 +90,19 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         }
 
         nextButton.setOnClickListener {
+            // Daily, just lead to home
             if (mode == "daily") {
                 findNavController().navigate(R.id.home_page)
             }
             else {
-                findNavController().navigate(R.id.go_to_next_endless)
+                // Endless if correct
+                if (result == GuessResult.CORRECT) {
+                    findNavController().navigate(R.id.go_to_next_endless)
+                }
+                // Endless if incorrect
+                else {
+                    findNavController().navigate(R.id.home_page)
+                }
             }
         }
     }
