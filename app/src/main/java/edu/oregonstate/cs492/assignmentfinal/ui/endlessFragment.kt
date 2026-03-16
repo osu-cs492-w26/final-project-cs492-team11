@@ -1,6 +1,5 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
-import GameDetailsViewModel
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -59,18 +58,9 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val confirmButton: Button = view.findViewById(R.id.submit_button)
         // Takes the answer from the text box and the game stored in current_game_endless and compares then wins the game if true
         confirmButton.setOnClickListener {
-            val currentGame: String? = prefs.getString("current_game_endless", null)
-            val answer = view.findViewById<TextInputLayout>(R.id.game_input)
+            val guess = view.findViewById<TextInputLayout>(R.id.game_input)
                 .editText?.text.toString().trim()
-
-            if (currentGame != null && answer == currentGame) {
-                gameViewModel.completeGame()
-                view.findViewById<TextInputLayout>(R.id.game_input).editText?.text?.clear()
-                Log.d(tag, "Right Answer")
-            } else{
-                Log.d(tag, currentGame ?: "game not available")
-                Log.d(tag, "wrong answer")
-            }
+            gameViewModel.submitGuess(guess)
         }
 
         // Loads the next game for endless mode

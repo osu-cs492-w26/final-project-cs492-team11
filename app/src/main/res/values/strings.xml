@@ -24,6 +24,7 @@
         <string name="clue_label">Clue</string>
         <string name="back_arrow_description">Go to previous clue</string>
         <string name="forward_arrow_description">Go to next clue</string>
+        <string name="loading_error">Unable to fetch game data.  Error message: %1$s</string>
 
     [Preferences]
         <string name="settings_page_title">Settings</string>
