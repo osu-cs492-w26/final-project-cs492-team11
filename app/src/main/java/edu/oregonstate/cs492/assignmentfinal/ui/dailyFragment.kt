@@ -100,6 +100,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             val guess = view.findViewById<TextInputLayout>(R.id.game_input)
                 .editText?.text.toString().trim()
             gameViewModel.submitGuess(guess)
+            ACTVInput.setText("")
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
