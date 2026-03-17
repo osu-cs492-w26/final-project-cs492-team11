@@ -42,7 +42,7 @@
             <string name="dark_mode_pref_summary">Turn dark mode on or off</string>
         [Audio]
             <string name="audio_title">Mute</string>
-            <string name="audio_summary">Mute or unmute audio</string>
+            <string name="audio_summary">Mute or unmute sound effects</string>
         [Screen Timeout]
             <string name="screen_timeout_title">Screen Timeout</string>
             <string name="screen_timeout_val_5">5 Seconds</string>
