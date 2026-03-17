@@ -180,7 +180,7 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
             TVClue.text = when (currentHint) {
                 1-> ""
                 2-> "Metacritic: " + storedGame?.metacritic.toString()
-                3-> "ESRB Rating: " + (storedGame?.esrbRating?.name ?: "Not Available")
+                3-> "Date Released: " + (storedGame?.released ?: "Not Available")
                 4-> "Developer: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
                 5-> "Publisher: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
                 else -> "This should never happen"
