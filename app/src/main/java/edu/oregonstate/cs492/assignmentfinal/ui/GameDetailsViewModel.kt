@@ -1,7 +1,6 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import edu.oregonstate.cs492.assignmentfinal.data.Game

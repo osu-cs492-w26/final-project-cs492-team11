@@ -1,6 +1,7 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import edu.oregonstate.cs492.assignmentfinal.R
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import edu.oregonstate.cs492.assignmentfinal.data.Game
@@ -86,6 +88,30 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
                 currentHint -= 1
             }
             updateClueNumber()
+        }
+        gameViewModel.guessResult.observe(viewLifecycleOwner){ outcome ->
+            val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val isAudioEnabled = prefs.getBoolean("audio_enabled", false)
+            if (isAudioEnabled) return@observe
+            when (outcome){
+                GuessResult.CORRECT -> {
+                    val mp = MediaPlayer.create(requireContext(), R.raw.win_sound)
+                    mp.start()
+                    mp.setOnCompletionListener { it.release() }
+                }
+                GuessResult.INCORRECT -> {
+                    if (gameViewModel.hintIndex.value != 5){
+                        val mp = MediaPlayer.create(requireContext(), R.raw.wrong_answer)
+                        mp.start()
+                        mp.setOnCompletionListener { it.release() }
+                    }else{
+                        val mp = MediaPlayer.create(requireContext(), R.raw.lose_sound)
+                        mp.start()
+                        mp.setOnCompletionListener { it.release() }
+                    }
+                }
+                else ->  null
+            }
         }
 
         // Confirm Button
