@@ -248,8 +248,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                     val url = storedScreenshots?.photos?.getOrNull(currentHint-1)?.image
                     Glide.with(this)
                         .load(url)
-                        // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
-                        // .error(R.drawable.ic_error_image)               // TODO Error image
+                        .placeholder(R.drawable.ic_image_loading)
+                        .error(R.drawable.ic_image_error)
                         .into(IVClue)
                 }
             }
