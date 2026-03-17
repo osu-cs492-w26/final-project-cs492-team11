@@ -13,13 +13,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import edu.oregonstate.cs492.assignmentfinal.R
-import java.io.File
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
-import java.util.Calendar
-import kotlin.random.Random
 
 class endlessFragment : Fragment(R.layout.endless_game_page) {
 
@@ -29,6 +25,9 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
 
     private var currentHint = 1
 
+    private lateinit var loadingErrorTV: TextView
+    private lateinit var loadingIndicator: View
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val prefs = requireContext().getSharedPreferences("endless_game", Context.MODE_PRIVATE)
@@ -37,6 +36,9 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val IVClue = view.findViewById<ImageView>(R.id.image_clue)
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
+
+        loadingErrorTV = view.findViewById(R.id.tv_loading_error)
+        loadingIndicator = view.findViewById(R.id.loading_indicator)
 
         val input = requireContext().assets.open("games.txt")
         val lines = input.bufferedReader().readLines()
@@ -110,6 +112,22 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         gameViewModel.hintIndex.observe(viewLifecycleOwner) { index ->
             currentHint = index
             updateClueNumber()
+        }
+
+        gameViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            if (loading) {
+                loadingIndicator.visibility = View.VISIBLE
+                loadingErrorTV.visibility = View.INVISIBLE
+            } else {
+                loadingIndicator.visibility = View.INVISIBLE
+            }
+        }
+
+        gameViewModel.error.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                loadingErrorTV.text = getString(R.string.loading_error, error.message)
+                loadingErrorTV.visibility = View.VISIBLE
+            }
         }
     }
 
