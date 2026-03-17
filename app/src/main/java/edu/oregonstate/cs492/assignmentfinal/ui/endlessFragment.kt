@@ -121,6 +121,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             val guess = view.findViewById<TextInputLayout>(R.id.game_input)
                 .editText?.text.toString().trim()
             gameViewModel.submitGuess(guess)
+            ACTVInput.setText("")
         }
 
         gameViewModel.gameCompleted.observe(viewLifecycleOwner) { completed ->
