@@ -49,6 +49,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         super.onViewCreated(view, savedInstanceState)
         // Preferences for game
         val prefs = requireContext().getSharedPreferences("daily_game", Context.MODE_PRIVATE)
+        val mainContent = view.findViewById<View>(R.id.main_content)
 
         TVClue = view.findViewById<TextView>(R.id.text_clue)
         IVClue = view.findViewById<ImageView>(R.id.image_clue)
@@ -134,8 +135,10 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             if (loading) {
                 loadingIndicator.visibility = View.VISIBLE
                 loadingErrorTV.visibility = View.INVISIBLE
+                mainContent.visibility = View.INVISIBLE
             } else {
                 loadingIndicator.visibility = View.INVISIBLE
+                mainContent.visibility = View.VISIBLE
             }
         }
 
@@ -146,8 +149,6 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                 loadingErrorTV.visibility = View.VISIBLE
             }
         }
-
-
     }
 
     // Seeds the Daily game and initiates a network call for that game

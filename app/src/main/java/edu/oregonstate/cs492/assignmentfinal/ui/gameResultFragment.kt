@@ -1,5 +1,7 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -54,6 +56,10 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         val screenshots = gameViewModel.screenshots.value
         val mode = arguments?.getString("mode") ?: "daily"
 
+        val url = gameViewModel.game.value?.website
+        // only works if there is a url
+        visitButton.isEnabled = !url.isNullOrBlank()
+
         outcomeTV.text = when (result) {
             GuessResult.CORRECT -> getString(R.string.correct_guess_text)
             GuessResult.INCORRECT -> getString(R.string.incorrect_guess_text)
@@ -107,8 +113,10 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         updateClue()
 
         visitButton.setOnClickListener {
-            // Implement later
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
+
 
         nextButton.setOnClickListener {
             // Daily, just lead to home

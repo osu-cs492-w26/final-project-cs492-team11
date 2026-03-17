@@ -45,6 +45,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val prefs = requireContext().getSharedPreferences("endless_game", Context.MODE_PRIVATE)
+        val mainContent = view.findViewById<View>(R.id.main_content)
 
         TVClue = view.findViewById<TextView>(R.id.text_clue)
         IVClue = view.findViewById<ImageView>(R.id.image_clue)
@@ -134,8 +135,10 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             if (loading) {
                 loadingIndicator.visibility = View.VISIBLE
                 loadingErrorTV.visibility = View.INVISIBLE
+                mainContent.visibility = View.INVISIBLE
             } else {
                 loadingIndicator.visibility = View.INVISIBLE
+                mainContent.visibility = View.VISIBLE
             }
         }
 
