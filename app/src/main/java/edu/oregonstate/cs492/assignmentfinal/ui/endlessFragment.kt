@@ -12,10 +12,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import edu.oregonstate.cs492.assignmentfinal.R
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
+import edu.oregonstate.cs492.assignmentfinal.data.Game
+import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
+import kotlinx.coroutines.launch
 
 class endlessFragment : Fragment(R.layout.endless_game_page) {
 
@@ -25,15 +29,23 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
 
     private var currentHint = 1
 
+    private var gameReady = false
+    private var storedGame: Game? = null
+    private var screenshotsReady = false
+    private var storedScreenshots: GameScreenshots? = null
+
     private lateinit var loadingErrorTV: TextView
     private lateinit var loadingIndicator: View
+
+    private lateinit var TVClue: TextView
+    private lateinit var IVClue: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val prefs = requireContext().getSharedPreferences("endless_game", Context.MODE_PRIVATE)
 
-        val TVName = view.findViewById<TextView>(R.id.endless_name)
-        val IVClue = view.findViewById<ImageView>(R.id.image_clue)
+        TVClue = view.findViewById<TextView>(R.id.text_clue)
+        IVClue = view.findViewById<ImageView>(R.id.image_clue)
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
 
@@ -92,20 +104,16 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
-            if (game != null) {
-                TVName.text = game.name ?: "Error: Unknown Game"
+            gameReady = game != null
+            if (gameReady) {
+                storedGame = game
             }
         }
 
         gameViewModel.screenshots.observe(viewLifecycleOwner) { screenshots ->
-            val firstPhotoUrl = screenshots?.photos?.firstOrNull()?.image
-
-            if (firstPhotoUrl != null) {
-                Glide.with(this)
-                    .load(firstPhotoUrl)
-                    // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
-                    // .error(R.drawable.ic_error_image)               // TODO Error image
-                    .into(IVClue)
+            screenshotsReady = screenshots != null
+            if (screenshotsReady) {
+                storedScreenshots = screenshots
             }
         }
 
@@ -174,5 +182,38 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             currentHint,
             gameViewModel.maxHints
         )
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            updateHintShown()
+        }
+    }
+
+    suspend private fun updateHintShown() {
+        if (gameReady && screenshotsReady) {
+            // Image:
+            storedScreenshots?.count?.let {
+                if (it > currentHint-1) {
+                    val url = storedScreenshots?.photos?.getOrNull(currentHint-1)?.image
+                    Glide.with(this)
+                        .load(url)
+                        // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
+                        // .error(R.drawable.ic_error_image)               // TODO Error image
+                        .into(IVClue)
+                }
+            }
+
+            // Text
+            TVClue.text = when (currentHint) {
+                1-> ""
+                2-> "Metacritic: " + storedGame?.metacritic.toString()
+                3-> "ESRB Rating: " + (storedGame?.esrbRating?.name ?: "Not Available")
+                4-> "Developer: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
+                5-> "Publisher: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
+                else -> "This should never happen"
+            }
+        } else {
+            kotlinx.coroutines.delay(50)
+            updateHintShown()
+        }
     }
 }

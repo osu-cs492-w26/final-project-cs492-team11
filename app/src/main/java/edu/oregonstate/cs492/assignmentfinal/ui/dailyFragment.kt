@@ -13,16 +13,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import edu.oregonstate.cs492.assignmentfinal.R
-import java.io.File
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputLayout
+import edu.oregonstate.cs492.assignmentfinal.data.Game
 import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.time.delay
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -33,12 +31,14 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
     private val tag = "DailyFragment"
     private var gameReady = false
+    private var storedGame: Game? = null
     private var screenshotsReady = false
     private var storedScreenshots: GameScreenshots? = null
 
     private lateinit var loadingErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
 
+    private lateinit var TVClue: TextView
     private lateinit var IVClue: ImageView
 
     private var currentHint = 1
@@ -48,7 +48,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         // Preferences for game
         val prefs = requireContext().getSharedPreferences("daily_game", Context.MODE_PRIVATE)
 
-        val TVName = view.findViewById<TextView>(R.id.daily_name)
+        TVClue = view.findViewById<TextView>(R.id.text_clue)
         IVClue = view.findViewById<ImageView>(R.id.image_clue)
         // AutoComplete Text View Input
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
@@ -79,9 +79,6 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                 currentHint += 1
             }
             updateClueNumber()
-            viewLifecycleOwner.lifecycleScope.launch {
-                updateHintShown()
-            }
         }
 
         leftArrow.setOnClickListener {
@@ -89,9 +86,6 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                 currentHint -= 1
             }
             updateClueNumber()
-            viewLifecycleOwner.lifecycleScope.launch {
-                updateHintShown()
-            }
         }
 
         // Confirm Button
@@ -104,6 +98,9 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
             gameReady = game != null
+            if (gameReady) {
+                storedGame = game
+            }
         }
 
         gameViewModel.gameCompleted.observe(viewLifecycleOwner) { completed ->
@@ -120,25 +117,12 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             if (screenshotsReady) {
                 storedScreenshots = screenshots
             }
-            /*
-            val firstPhotoUrl = screenshots?.photos?.firstOrNull()?.image
-
-            if (firstPhotoUrl != null) {
-                Glide.with(this)
-                    .load(firstPhotoUrl)
-                    // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
-                    // .error(R.drawable.ic_error_image)               // TODO Error image
-                    .into(IVClue)
-            }*/
         }
 
         // Updates the current hint to be newest one when guessing
         gameViewModel.hintIndex.observe(viewLifecycleOwner) { index ->
             currentHint = index
             updateClueNumber()
-            viewLifecycleOwner.lifecycleScope.launch {
-                updateHintShown()
-            }
         }
 
         // Loading
@@ -233,15 +217,18 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             currentHint,
             gameViewModel.maxHints
         )
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            updateHintShown()
+        }
     }
 
     suspend private fun updateHintShown() {
         if (gameReady && screenshotsReady) {
-            Log.d(tag, "all is ready")
             // Image:
             storedScreenshots?.count?.let {
-                if (it > currentHint) {
-                    val url = storedScreenshots?.photos?.getOrNull(currentHint)?.image
+                if (it > currentHint-1) {
+                    val url = storedScreenshots?.photos?.getOrNull(currentHint-1)?.image
                     Glide.with(this)
                         .load(url)
                         // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
@@ -250,6 +237,15 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                 }
             }
 
+            // Text
+            TVClue.text = when (currentHint) {
+                1-> ""
+                2-> "Metacritic: " + storedGame?.metacritic.toString()
+                3-> "ESRB Rating: " + (storedGame?.esrbRating?.name ?: "Not Available")
+                4-> "Developer: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
+                5-> "Publisher: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
+                else -> "This should never happen"
+            }
         } else {
             kotlinx.coroutines.delay(50)
             updateHintShown()
