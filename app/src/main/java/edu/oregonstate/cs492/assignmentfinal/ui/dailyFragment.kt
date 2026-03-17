@@ -15,10 +15,14 @@ import androidx.fragment.app.activityViewModels
 import edu.oregonstate.cs492.assignmentfinal.R
 import java.io.File
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputLayout
+import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.time.delay
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -28,9 +32,14 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
     private val gameViewModel: GameDetailsViewModel by activityViewModels()
 
     private val tag = "DailyFragment"
+    private var gameReady = false
+    private var screenshotsReady = false
+    private var storedScreenshots: GameScreenshots? = null
 
     private lateinit var loadingErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
+
+    private lateinit var IVClue: ImageView
 
     private var currentHint = 1
 
@@ -40,7 +49,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         val prefs = requireContext().getSharedPreferences("daily_game", Context.MODE_PRIVATE)
 
         val TVName = view.findViewById<TextView>(R.id.daily_name)
-        val IVClue = view.findViewById<ImageView>(R.id.image_clue)
+        IVClue = view.findViewById<ImageView>(R.id.image_clue)
         // AutoComplete Text View Input
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val confirmButton: Button = view.findViewById(R.id.submit_button)
@@ -70,6 +79,9 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                 currentHint += 1
             }
             updateClueNumber()
+            viewLifecycleOwner.lifecycleScope.launch {
+                updateHintShown()
+            }
         }
 
         leftArrow.setOnClickListener {
@@ -77,8 +89,10 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                 currentHint -= 1
             }
             updateClueNumber()
+            viewLifecycleOwner.lifecycleScope.launch {
+                updateHintShown()
+            }
         }
-
 
         // Confirm Button
         // Takes the answer from the text box and the game stored in last_game and compares then wins the game if true
@@ -89,9 +103,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
-            if (game != null) {
-                TVName.text = game.name ?: "Error: Unknown Game"
-            }
+            gameReady = game != null
         }
 
         gameViewModel.gameCompleted.observe(viewLifecycleOwner) { completed ->
@@ -104,6 +116,11 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         }
 
         gameViewModel.screenshots.observe(viewLifecycleOwner) { screenshots ->
+            screenshotsReady = screenshots != null
+            if (screenshotsReady) {
+                storedScreenshots = screenshots
+            }
+            /*
             val firstPhotoUrl = screenshots?.photos?.firstOrNull()?.image
 
             if (firstPhotoUrl != null) {
@@ -112,13 +129,16 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
                     // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
                     // .error(R.drawable.ic_error_image)               // TODO Error image
                     .into(IVClue)
-            }
+            }*/
         }
 
         // Updates the current hint to be newest one when guessing
         gameViewModel.hintIndex.observe(viewLifecycleOwner) { index ->
             currentHint = index
             updateClueNumber()
+            viewLifecycleOwner.lifecycleScope.launch {
+                updateHintShown()
+            }
         }
 
         // Loading
@@ -213,5 +233,26 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             currentHint,
             gameViewModel.maxHints
         )
+    }
+
+    suspend private fun updateHintShown() {
+        if (gameReady && screenshotsReady) {
+            Log.d(tag, "all is ready")
+            // Image:
+            storedScreenshots?.count?.let {
+                if (it > currentHint) {
+                    val url = storedScreenshots?.photos?.getOrNull(currentHint)?.image
+                    Glide.with(this)
+                        .load(url)
+                        // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
+                        // .error(R.drawable.ic_error_image)               // TODO Error image
+                        .into(IVClue)
+                }
+            }
+
+        } else {
+            kotlinx.coroutines.delay(50)
+            updateHintShown()
+        }
     }
 }
