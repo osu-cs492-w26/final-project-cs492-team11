@@ -1,9 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="10dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline20vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline80vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7_5horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.075"/>
+
+    <!-- Guess outcome (correct/incorrect) -->
+    <TextView
+        android:id="@+id/guess_outcome_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Correct"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline7_5horizontal"
+        app:layout_constraintStart_toStartOf="@id/guideline20vertical"
+        app:layout_constraintEnd_toStartOf="@id/guideline80vertical" />
+
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline15horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline20vertical" />
+
+    <!-- Game title -->
+    <TextView
+        android:id="@+id/game_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Game Name"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textSize="30sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guideline7_5horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guideline15horizontal"
+        app:layout_constraintStart_toStartOf="@id/guideline20vertical"
+        app:layout_constraintEnd_toStartOf="@id/guideline80vertical" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15horizontal"
@@ -122,39 +184,28 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:gravity="center"
-        android:text="1/5"
+        android:text="5"
         app:layout_constraintTop_toBottomOf="@id/clue_text_label"
         app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Autofilling dropdown -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/game_input"
+    <Button
+        android:id="@+id/visit_game_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/guess_hint_text"
+        android:text="@string/visit_game_page_label"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/guideline80horizontal"
         app:layout_constraintBottom_toTopOf="@id/guideline90horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:dropDownHeight="200dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+        app:layout_constraintStart_toEndOf="@id/guideline20vertical"
+        app:layout_constraintEnd_toStartOf="@id/guideline80vertical"/>
 
     <Button
-        android:id="@+id/submit_button"
+        android:id="@+id/next_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/guess_confirm_button_text"
+        android:text="@string/endless_next_button"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/guideline90horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -171,7 +222,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/loading_indicator"
@@ -182,6 +233,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

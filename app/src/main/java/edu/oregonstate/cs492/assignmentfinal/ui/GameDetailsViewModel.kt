@@ -1,17 +1,18 @@
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+package edu.oregonstate.cs492.assignmentfinal.ui
+
+import android.app.Application
+import android.content.Context
+import android.util.Log
+import androidx.lifecycle.*
 import edu.oregonstate.cs492.assignmentfinal.data.Game
 import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
 import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshotsRepository
 import edu.oregonstate.cs492.assignmentfinal.data.RAWGService
 import edu.oregonstate.cs492.assignmentfinal.data.SingleGameRepository
 import kotlinx.coroutines.launch
-import android.util.Log
 
+class GameDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
-class GameDetailsViewModel : ViewModel() {
     private val gameRepo = SingleGameRepository(RAWGService.create())
     private val screenshotRepo = GameScreenshotsRepository(RAWGService.create())
 
@@ -30,16 +31,18 @@ class GameDetailsViewModel : ViewModel() {
     private val _gameCompleted = MutableLiveData<Boolean>(false)
     val gameCompleted: LiveData<Boolean> get() = _gameCompleted
 
-    fun completeGame() {
-        _gameCompleted.value = true
-    }
+    private val _guessResult = MutableLiveData<GuessResult?>(null)
+    val guessResult: LiveData<GuessResult?> = _guessResult
 
-    fun resetCompletion() {
-        _gameCompleted.value = false
-    }
+    private val _hintIndex = MutableLiveData(1)
+    val hintIndex: LiveData<Int> = _hintIndex
 
+    val maxHints = 5
+
+    private var correctAnswer: String? = null
 
     fun loadGameData(slug: String, key: String) {
+        resetCompletion()
         viewModelScope.launch {
             _loading.value = true
 
@@ -49,16 +52,60 @@ class GameDetailsViewModel : ViewModel() {
             _loading.value = false
 
             if (gameResult.isSuccess) {
-                _game.value = gameResult.getOrNull()
+                val gameObj = gameResult.getOrNull()
+                _game.value = gameObj
+                correctAnswer = gameObj?.name
             } else {
                 _error.value = gameResult.exceptionOrNull()
             }
 
             if (screenshotsResult.isSuccess) {
                 _screenshots.value = screenshotsResult.getOrNull()
-            } else if (_error.value == null) { // Update error value only if main one did not
+            } else if (_error.value == null) {
                 _error.value = screenshotsResult.exceptionOrNull()
             }
         }
     }
+
+    fun submitGuess(guess: String) {
+        if (guess.isBlank()) {
+            _guessResult.value = GuessResult.EMPTY
+            return
+        }
+
+        if (guess.equals(correctAnswer, ignoreCase = true)) {
+            _guessResult.value = GuessResult.CORRECT
+            _gameCompleted.value = true
+        } else {
+            _guessResult.value = GuessResult.INCORRECT
+            incrementHint()
+
+            if ((_hintIndex.value ?: 0) > maxHints) {
+                _gameCompleted.value = true
+            }
+        }
+        Log.d("Guess", _guessResult.value.toString())
+    }
+
+    fun resetCompletion() {
+        _game.value = null
+        _screenshots.value = null
+        _error.value = null
+        _loading.value = false
+        _gameCompleted.value = false
+        _guessResult.value = null
+        _hintIndex.value = 1
+        correctAnswer = null
+    }
+
+    fun incrementHint() {
+        val current = _hintIndex.value ?: 1
+        if (current <= maxHints) {
+            _hintIndex.value = current + 1
+        }
+    }
+}
+
+enum class GuessResult {
+    CORRECT, INCORRECT, EMPTY
 }
