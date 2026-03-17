@@ -102,7 +102,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val skipButton: Button = view.findViewById(R.id.skip_button)
 
         skipButton.setOnClickListener {
-
+            findNavController().navigate(R.id.endless_page)
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
