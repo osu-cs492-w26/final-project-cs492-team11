@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import edu.oregonstate.cs492.assignmentfinal.R
+import kotlin.getValue
 
 class homeFragment : Fragment(R.layout.home_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,5 +25,11 @@ class homeFragment : Fragment(R.layout.home_page) {
         settingsBtn.setOnClickListener {
             findNavController().navigate(R.id.navigate_to_settings)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val gameViewModel: GameDetailsViewModel by activityViewModels()
+        gameViewModel.newRun()
     }
 }

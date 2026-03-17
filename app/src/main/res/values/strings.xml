@@ -22,9 +22,6 @@
         <string name="daily_game_done_button">Done</string>
         <string name="endless_next_button">Next</string>
 
-
-
-
     [General]
         <string name="guess_hint_text">Guess your game</string>
         <string name="guess_confirm_button_text">Confirm</string>
@@ -35,6 +32,8 @@
         <string name="back_arrow_description">Go to previous clue</string>
         <string name="forward_arrow_description">Go to next clue</string>
         <string name="loading_error">Unable to fetch game data.  Error message: %1$s</string>
+        <string name="score_text">Score: %1$d</string>
+
 
     [Preferences]
         <string name="settings_page_title">Settings</string>

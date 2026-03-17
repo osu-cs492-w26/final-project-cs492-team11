@@ -48,6 +48,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         IVClue = view.findViewById<ImageView>(R.id.image_clue)
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
+        val TVScore = view.findViewById<TextView>(R.id.score_text)
 
         loadingErrorTV = view.findViewById(R.id.tv_loading_error)
         loadingIndicator = view.findViewById(R.id.loading_indicator)
@@ -64,6 +65,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val rightArrow: ImageButton = view.findViewById(R.id.clue_forward_arrow)
         val leftArrow: ImageButton = view.findViewById(R.id.clue_back_arrow)
 
+        TVScore.text = getString(R.string.score_text, gameViewModel.score.value ?: 0)
         rightArrow.setOnClickListener {
             val maxUnlocked = gameViewModel.hintIndex.value ?: 1
             if (currentHint < maxUnlocked) {
@@ -100,7 +102,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val skipButton: Button = view.findViewById(R.id.skip_button)
 
         skipButton.setOnClickListener {
-
+            findNavController().navigate(R.id.endless_page)
         }
 
         gameViewModel.game.observe(viewLifecycleOwner) { game ->
