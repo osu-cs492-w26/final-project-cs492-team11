@@ -71,11 +71,6 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun submitGuess(guess: String) {
-        if (guess.isBlank()) {
-            _guessResult.value = GuessResult.EMPTY
-            return
-        }
-
         if (guess.equals(correctAnswer, ignoreCase = true)) {
             _guessResult.value = GuessResult.CORRECT
             _gameCompleted.value = true
