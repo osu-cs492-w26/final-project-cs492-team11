@@ -245,7 +245,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val seed = (year * 10000 + month * 100 + day * 10).toLong()
+        val seed = (year * 100000 + month * 1000 + day).toLong() + 1
         return seed
     }
 
