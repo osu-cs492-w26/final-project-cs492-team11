@@ -177,6 +177,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
             if (error != null) {
                 loadingErrorTV.text = getString(R.string.loading_error, error.message)
                 loadingErrorTV.visibility = View.VISIBLE
+                mainContent.visibility = View.INVISIBLE
             }
         }
 

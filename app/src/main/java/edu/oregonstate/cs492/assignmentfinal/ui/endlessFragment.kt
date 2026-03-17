@@ -173,6 +173,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             if (error != null) {
                 loadingErrorTV.text = getString(R.string.loading_error, error.message)
                 loadingErrorTV.visibility = View.VISIBLE
+                mainContent.visibility = View.INVISIBLE
             }
         }
 
