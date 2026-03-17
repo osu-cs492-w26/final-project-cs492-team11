@@ -1,21 +1,37 @@
 package edu.oregonstate.cs492.assignmentfinal.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import edu.oregonstate.cs492.assignmentfinal.R
+import edu.oregonstate.cs492.assignmentfinal.data.Game
+import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
+import kotlinx.coroutines.launch
 
 class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
     private val gameViewModel: GameDetailsViewModel by activityViewModels()
 
     private val tag = "GameResultFragment"
+
+    private var gameReady = false
+    private var storedGame: Game? = null
+    private var screenshotsReady = false
+    private var storedScreenshots: GameScreenshots? = null
+
+    private lateinit var TVClue: TextView
+    private lateinit var IVClue: ImageView
 
     private var currentHint = 1
 
@@ -27,8 +43,8 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         val scoreTV = view.findViewById<TextView>(R.id.score_text)
 
         val clueNumberTV = view.findViewById<TextView>(R.id.clue_number)
-        val textClueTV = view.findViewById<TextView>(R.id.text_clue)
-        val imageClueIV = view.findViewById<ImageView>(R.id.image_clue)
+        TVClue = view.findViewById<TextView>(R.id.text_clue)
+        IVClue = view.findViewById<ImageView>(R.id.image_clue)
 
         val backArrow = view.findViewById<ImageButton>(R.id.clue_back_arrow)
         val forwardArrow = view.findViewById<ImageButton>(R.id.clue_forward_arrow)
@@ -40,6 +56,10 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         val game = gameViewModel.game.value
         val screenshots = gameViewModel.screenshots.value
         val mode = arguments?.getString("mode") ?: "daily"
+
+        val url = gameViewModel.game.value?.website
+        // only works if there is a url
+        visitButton.isEnabled = !url.isNullOrBlank()
 
         outcomeTV.text = when (result) {
             GuessResult.CORRECT -> getString(R.string.correct_guess_text)
@@ -64,14 +84,17 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
         // Score, endless mode only
         if (mode == "endless") {
-            val score = arguments?.getInt("score") ?: 0
-            scoreTV.text = "Score: $score"
+            scoreTV.text = getString(R.string.score_text, gameViewModel.score)
         } else {
             scoreTV.visibility = View.GONE
         }
 
         fun updateClue() {
             clueNumberTV.text = getString(R.string.clue_number, currentHint, gameViewModel.maxHints)
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                updateHintShown()
+            }
         }
 
         backArrow.setOnClickListener {
@@ -91,8 +114,10 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         updateClue()
 
         visitButton.setOnClickListener {
-            // Implement later
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
+
 
         nextButton.setOnClickListener {
             // Daily, just lead to home
@@ -109,6 +134,53 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
                     findNavController().navigate(R.id.home_page)
                 }
             }
+        }
+
+        gameViewModel.game.observe(viewLifecycleOwner) { game ->
+            gameReady = game != null
+            if (gameReady) {
+                storedGame = game
+            }
+        }
+
+        gameViewModel.screenshots.observe(viewLifecycleOwner) { screenshots ->
+            screenshotsReady = screenshots != null
+            if (screenshotsReady) {
+                storedScreenshots = screenshots
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.home_page)
+        }
+    }
+
+    suspend private fun updateHintShown() {
+        if (gameReady && screenshotsReady) {
+            // Image:
+            storedScreenshots?.count?.let {
+                if (it > currentHint-1) {
+                    val url = storedScreenshots?.photos?.getOrNull(currentHint-1)?.image
+                    Glide.with(this)
+                        .load(url)
+                        // .placeholder(R.drawable.ic_loading_placeholder) // TODO Placeholder image
+                        // .error(R.drawable.ic_error_image)               // TODO Error image
+                        .into(IVClue)
+                }
+            }
+
+            // Text
+            TVClue.text = when (currentHint) {
+                1-> ""
+                2-> "Metacritic: " + storedGame?.metacritic.toString()
+                3-> "ESRB Rating: " + (storedGame?.esrbRating?.name ?: "Not Available")
+                4-> "Developer: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
+                5-> "Publisher: " + (storedGame?.developers?.getOrNull(0)?.name ?: "Not Available")
+                else -> "This should never happen"
+            }
+        } else {
+            kotlinx.coroutines.delay(50)
+            updateHintShown()
         }
     }
 }
