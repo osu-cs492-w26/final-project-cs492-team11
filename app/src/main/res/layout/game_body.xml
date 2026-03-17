@@ -47,85 +47,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50"/>
 
-    <!-- Image clue -->
-    <ImageView
-        android:id="@+id/image_clue"
+    <!-- Refactored into hint_body.xml -->
+    <include
+        layout="@layout/hint_body"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/guideline15horizontal"
-        app:layout_constraintBottom_toTopOf="@id/guideline65horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Text clue -->
-    <TextView
-        android:id="@+id/text_clue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="2"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/guideline15horizontal"
-        app:layout_constraintBottom_toTopOf="@id/guideline65horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Clue Text Label -->
-    <TextView
-        android:id="@+id/clue_text_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:text="@string/clue_label"
-        app:layout_constraintTop_toBottomOf="@id/guideline65horizontal"
-        app:layout_constraintBottom_toTopOf="@id/guideline75horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Back arrow -->
-    <ImageButton
-        android:id="@+id/clue_back_arrow"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/rounded_arrow_back_24"
-        android:contentDescription="@string/back_arrow_description"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintTop_toBottomOf="@id/clue_text_label"
         app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline50horizontal" />
-
-    <!-- Forward arrow -->
-    <ImageButton
-        android:id="@+id/clue_forward_arrow"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/rounded_arrow_forward_24"
-        android:contentDescription="@string/forward_arrow_description"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintTop_toBottomOf="@id/clue_text_label"
-        app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
-        app:layout_constraintStart_toEndOf="@id/guideline50horizontal"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Clue label -->
-    <TextView
-        android:id="@+id/clue_number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:text="1/5"
-        app:layout_constraintTop_toBottomOf="@id/clue_text_label"
-        app:layout_constraintBottom_toTopOf="@id/guideline80horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Autofilling dropdown -->
     <com.google.android.material.textfield.TextInputLayout
@@ -159,28 +89,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_loading_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="?attr/colorError"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>/>
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/loading_indicator"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
