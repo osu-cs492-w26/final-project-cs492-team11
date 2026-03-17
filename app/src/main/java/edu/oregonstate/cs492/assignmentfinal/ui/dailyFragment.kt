@@ -62,7 +62,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
         ACTVInput.setAdapter(adapter)
         // Two characters have to be typed
-        ACTVInput.threshold = 2
+        ACTVInput.threshold = 4
 
         rightArrow.setOnClickListener {
             val maxUnlocked = gameViewModel.hintIndex.value ?: 1

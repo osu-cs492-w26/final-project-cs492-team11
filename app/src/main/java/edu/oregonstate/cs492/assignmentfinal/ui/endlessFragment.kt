@@ -46,7 +46,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
         ACTVInput.setAdapter(adapter)
         // Two characters have to be typed
-        ACTVInput.threshold = 2
+        ACTVInput.threshold = 4
 
         // Clue Button
         val rightArrow: ImageButton = view.findViewById(R.id.clue_forward_arrow)
