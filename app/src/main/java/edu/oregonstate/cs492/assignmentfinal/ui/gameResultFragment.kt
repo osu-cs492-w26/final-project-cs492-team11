@@ -18,6 +18,7 @@ import edu.oregonstate.cs492.assignmentfinal.R
 import edu.oregonstate.cs492.assignmentfinal.data.Game
 import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
 import kotlinx.coroutines.launch
+import androidx.core.content.ContextCompat
 
 class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
@@ -62,8 +63,14 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
         visitButton.isEnabled = !url.isNullOrBlank()
 
         outcomeTV.text = when (result) {
-            GuessResult.CORRECT -> getString(R.string.correct_guess_text)
-            GuessResult.INCORRECT -> getString(R.string.incorrect_guess_text)
+            GuessResult.CORRECT -> {
+                outcomeTV.setTextColor(ContextCompat.getColor(requireContext(), R.color.correct_color))
+                getString(R.string.correct_guess_text)
+            }
+            GuessResult.INCORRECT -> {
+                outcomeTV.setTextColor(ContextCompat.getColor(requireContext(), R.color.incorrect_color))
+                getString(R.string.incorrect_guess_text)
+            }
             else -> ""
         }
 

@@ -70,4 +70,7 @@
     <color name="background_color">#ADADAD</color>
     <color name="btn_color">#03A9F4</color>
 
+    <color name="correct_color">#177A23</color>
+    <color name="incorrect_color">#C50404</color>
+
 </resources>
