@@ -39,13 +39,14 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
 
     val maxHints = 5
 
-    private val _score = MutableLiveData(0)
-    val score: LiveData<Int> = _score
+    var score = 0
+    var puzzleNum = 0
 
     private var correctAnswer: String? = null
 
     fun loadGameData(slug: String, key: String) {
         resetCompletion()
+        puzzleNum += 1
         viewModelScope.launch {
             _loading.value = true
 
@@ -79,7 +80,7 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
         if (guess.equals(correctAnswer, ignoreCase = true)) {
             _guessResult.value = GuessResult.CORRECT
             _gameCompleted.value = true
-            _score.value = (_score.value ?: 0) + 1
+            score += 1
         } else {
             _guessResult.value = GuessResult.INCORRECT
             incrementHint()
@@ -104,7 +105,8 @@ class GameDetailsViewModel(application: Application) : AndroidViewModel(applicat
 
     fun newRun() {
         resetCompletion()
-        _score.value = 0
+        score = 0
+        puzzleNum = 0
     }
 
     fun incrementHint() {

@@ -21,6 +21,8 @@ import com.google.android.material.textfield.TextInputLayout
 import edu.oregonstate.cs492.assignmentfinal.data.Game
 import edu.oregonstate.cs492.assignmentfinal.data.GameScreenshots
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -54,7 +56,7 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val confirmButton: Button = view.findViewById(R.id.submit_button)
 
-        val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
+        val TVDailyName = view.findViewById<TextView>(R.id.daily_name)
 
         val rightArrow: ImageButton = view.findViewById(R.id.clue_forward_arrow)
         val leftArrow: ImageButton = view.findViewById(R.id.clue_back_arrow)
@@ -72,6 +74,8 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         ACTVInput.setAdapter(adapter)
         // Two characters have to be typed
         ACTVInput.threshold = 2
+
+        TVDailyName.text = getString(R.string.daily_puzzle_title, getDailyNumber())
 
         rightArrow.setOnClickListener {
             val maxUnlocked = gameViewModel.hintIndex.value ?: 1
@@ -207,6 +211,13 @@ class dailyFragment : Fragment(R.layout.daily_game_fragment) {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val seed = (year * 10000 + month * 100 + day).toLong()
         return seed
+    }
+
+    // Defaults puzzle 1 to March 11th, 2026
+    fun getDailyNumber(): Int {
+        val start = LocalDate.of(2026, 3, 11)
+        val today = LocalDate.now()
+        return ChronoUnit.DAYS.between(start, today).toInt() + 1
     }
 
     private fun updateClueNumber() {

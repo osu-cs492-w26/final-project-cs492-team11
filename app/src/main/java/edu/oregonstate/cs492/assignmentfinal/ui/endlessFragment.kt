@@ -38,6 +38,8 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
     private lateinit var loadingIndicator: View
 
     private lateinit var TVClue: TextView
+
+    private lateinit var TVClueNumber: TextView
     private lateinit var IVClue: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,8 +49,10 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         TVClue = view.findViewById<TextView>(R.id.text_clue)
         IVClue = view.findViewById<ImageView>(R.id.image_clue)
         val ACTVInput = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
-        val TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
+        TVClueNumber = view.findViewById<TextView>(R.id.clue_number)
         val TVScore = view.findViewById<TextView>(R.id.score_text)
+
+        val TVPuzzleName = view.findViewById<TextView>(R.id.endless_name)
 
         loadingErrorTV = view.findViewById(R.id.tv_loading_error)
         loadingIndicator = view.findViewById(R.id.loading_indicator)
@@ -65,7 +69,8 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
         val rightArrow: ImageButton = view.findViewById(R.id.clue_forward_arrow)
         val leftArrow: ImageButton = view.findViewById(R.id.clue_back_arrow)
 
-        TVScore.text = getString(R.string.score_text, gameViewModel.score.value ?: 0)
+        TVScore.text = getString(R.string.score_text, gameViewModel.score)
+
         rightArrow.setOnClickListener {
             val maxUnlocked = gameViewModel.hintIndex.value ?: 1
             if (currentHint < maxUnlocked) {
@@ -109,6 +114,7 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
             gameReady = game != null
             if (gameReady) {
                 storedGame = game
+                TVPuzzleName.text = getString(R.string.endless_puzzle_title, gameViewModel.puzzleNum)
             }
         }
 
@@ -178,7 +184,6 @@ class endlessFragment : Fragment(R.layout.endless_game_page) {
     }
 
     private fun updateClueNumber() {
-        val TVClueNumber = view?.findViewById<TextView>(R.id.clue_number) ?: return
         TVClueNumber.text = getString(
             R.string.clue_number,
             currentHint,

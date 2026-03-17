@@ -77,7 +77,7 @@ class gameResultFragment : Fragment(R.layout.game_result_fragment) {
 
         // Score, endless mode only
         if (mode == "endless") {
-            scoreTV.text = getString(R.string.score_text, gameViewModel.score.value ?: 0)
+            scoreTV.text = getString(R.string.score_text, gameViewModel.score)
         } else {
             scoreTV.visibility = View.GONE
         }
