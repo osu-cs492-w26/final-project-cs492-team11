@@ -17,7 +17,7 @@ dark-souls-iii|Dark Souls III
 stardew-valley|Stardew Valley
 hitman|Hitman
 deus-ex-mankind-divided|Deus Ex: Mankind Divided
-playerunknowns-battlegrounds|PlayerUnknown�s Battlegrounds
+playerunknowns-battlegrounds|PlayerUnknown's Battlegrounds
 marvels-spider-man|Marvel's Spider-Man
 detroit-become-human|Detroit: Become Human
 prey|Prey
@@ -27,7 +27,7 @@ hellblade-senuas-sacrifice|Hellblade: Senua's Sacrifice
 control|Control
 for-honor|For Honor
 jedi-the-fallen-order|Star Wars Jedi: Fallen Order
-uncharted-4-a-thiefs-end|Uncharted 4: A Thief�s End
+uncharted-4-a-thiefs-end|Uncharted 4: A Thief's End
 death-stranding|Death Stranding
 hades-2018|Hades
 nierautomata|NieR:Automata
@@ -63,7 +63,7 @@ battlefield-1|Battlefield 1
 xcom-2|XCOM 2
 ori-and-the-blind-forest-definitive-edition|Ori and the Blind Forest: Definitive Edition
 ori-and-the-blind-forest|Ori and the Blind Forest
-civilization-vi|Sid Meier�s Civilization VI
+civilization-vi|Sid Meier's Civilization VI
 soma|SOMA
 the-last-of-us-part-2|The Last of Us Part II
 watch_dogs-2|Watch Dogs 2
@@ -95,7 +95,7 @@ celeste|Celeste
 smite|SMITE
 frostpunk|Frostpunk
 borderlands-game-of-the-year-enhanced|Borderlands Game of the Year Enhanced
-tom-clancys-the-division|Tom Clancy�s The Division
+tom-clancys-the-division|Tom Clancy's The Division
 black-mesa|Black Mesa
 ratchet-clank|Ratchet & Clank
 ghost-of-tsushima|Ghost of Tsushima
@@ -205,7 +205,7 @@ pac-man-championship-edition-2|PAC-MAN CHAMPIONSHIP EDITION 2
 into-the-breach|Into the Breach
 unravel-two|Unravel Two
 children-of-morta|Children of Morta
-division-2|Tom Clancy�s The Division 2
+division-2|Tom Clancy's The Division 2
 day-of-the-tentacle-remastered|Day of the Tentacle Remastered
 northgard|Northgard
 dying-light-2|Dying Light 2 Stay Human
@@ -423,7 +423,7 @@ the-jackbox-party-pack-2|The Jackbox Party Pack 2
 the-legend-of-zelda-breath-of-the-wild-sequel|The Legend of Zelda: Tears of the Kingdom
 sundered|Sundered
 offworld-trading-company|Offworld Trading Company
-crash-bandicoot-4-its-about-time|Crash Bandicoot 4: It�s About Time
+crash-bandicoot-4-its-about-time|Crash Bandicoot 4: It's About Time
 doom-64-2020|DOOM 64 (2020)
 warhammer-40k-dow-iii|Warhammer 40,000: Dawn of War III
 gremlins-inc|Gremlins, Inc.
@@ -562,13 +562,13 @@ rock-of-ages-2-bigger-boulder|Rock of Ages 2: Bigger & Boulder
 aviary-attorney|Aviary Attorney
 chivalry-2|Chivalry 2
 ea-sports-ufc-2|EA SPORTS UFC 2
-gods-trigger|God�s Trigger
+gods-trigger|God's Trigger
 pumpkin-jack|Pumpkin Jack
 yuppie-psycho|Yuppie Psycho
 homeworld-deserts-of-kharak|Homeworld: Deserts of Kharak
 signalis|Signalis
 kingdom-hearts-hd-1525-remix|KINGDOM HEARTS HD 1.5 +2.5 ReMIX
-pokemon-2019|Pok�mon Sword and Shield
+pokemon-2019|Pokémon Sword and Shield
 artifact|Artifact
 tales-of-vesperia-definitive-edition|Tales of Vesperia: Definitive Edition
 omno|Omno
@@ -588,7 +588,7 @@ mages-of-mystralia|Mages of Mystralia
 paradigm|Paradigm
 detention|Detention
 evolve|Evolve
-the-witcher-3-wild-hunt-hearts-of-stone|The Witcher 3: Wild Hunt � Hearts of Stone
+the-witcher-3-wild-hunt-hearts-of-stone|The Witcher 3: Wild Hunt - Hearts of Stone
 dungeon-fighter-online|Dungeon Fighter Online
 oneshot|OneShot
 the-adventure-pals|The Adventure Pals
@@ -605,7 +605,7 @@ blazblue-chrono-phantasma-extend|BlazBlue: Chrono Phantasma EXTEND
 sudden-strike-4|Sudden Strike 4
 skul-the-hero-slayer|Skul: The Hero Slayer
 n-nplusplus|N++ (NPLUSPLUS)
-the-witcher-3-wild-hunt-blood-and-wine|The Witcher 3: Wild Hunt � Blood and Wine
+the-witcher-3-wild-hunt-blood-and-wine|The Witcher 3: Wild Hunt - Blood and Wine
 uncharted-the-nathan-drake-collection|UNCHARTED The Nathan Drake Collection
 heavens-vault|Heaven's Vault
 burly-men-at-sea|Burly Men at Sea
@@ -625,7 +625,7 @@ horizon-zero-dawn-the-frozen-wilds|Horizon Zero Dawn: The Frozen Wilds
 art-of-rally|art of rally
 virtuaverse|VirtuaVerse
 the-age-of-decadence|The Age of Decadence
-roki|R�ki
+roki|Röki
 florence|Florence
 halo-wars-definitive-edition|Halo Wars: Definitive Edition
 archeage|ArcheAge
@@ -673,7 +673,7 @@ gtfo|GTFO
 crown-trick|Crown Trick
 final-fantasy-viii-remastered|Final Fantasy VIII Remastered
 zombie-army-dead-war-4|Zombie Army 4: Dead War
-nioh-2-the-complete-edition|Nioh 2 � The Complete Edition
+nioh-2-the-complete-edition|Nioh 2 - The Complete Edition
 prodeus|Prodeus
 deathtrap|Deathtrap
 eldest-souls|Eldest Souls
@@ -691,14 +691,14 @@ batman-return-to-arkham|Batman: Return to Arkham
 hardspace-shipbreaker|Hardspace: Shipbreaker
 ion-fury|Ion Fury
 moss|Moss
-chicken-police|Chicken Police � Paint it RED!
+chicken-police|Chicken Police - Paint it RED!
 lawbreakers|LawBreakers
 mushroom-11|Mushroom 11
 spellforce-2-gold-edition|SpellForce 2 Anniversary Edition
 the-jackbox-party-pack-5|The Jackbox Party Pack 5
 pro-evolution-soccer-2018|Pro Evolution Soccer 2018
 the-artful-escape|The Artful Escape
-pokemontm-lets-go-pikachu-eevee|Pok�mon: Let's Go, Pikachu! and Eevee!
+pokemontm-lets-go-pikachu-eevee|Pokémon: Let's Go, Pikachu! and Eevee!
 assault-android-cactus|Assault Android Cactus
 blood-bowl-2|Blood Bowl 2
 unmetal|UnMetal
@@ -731,7 +731,7 @@ plants-vs-zombies-garden-warfare-2|Plants vs. Zombies Garden Warfare 2
 astro-bot-rescue-mission|Astro Bot Rescue Mission
 haven-2|Haven
 the-jackbox-party-pack-6|The Jackbox Party Pack 6
-pokemon-sun|Pok�mon Sun, Moon
+pokemon-sun|Pokémon Sun, Moon
 icey|ICEY
 super-mario-maker-2|Super Mario Maker 2
 demons-souls-remake|Demon's Souls (2020)
@@ -746,7 +746,7 @@ if-found|If Found...
 horace|Horace
 rez-infinite|Rez Infinite
 monster-hunter-world-iceborne|Monster Hunter World: Iceborne
-super-mario-3d-world-bowsers-fury|Super Mario 3D World + Bowser�s Fury
+super-mario-3d-world-bowsers-fury|Super Mario 3D World + Bowser's Fury
 mega-man-11|Mega Man 11
 deadbolt|Deadbolt
 total-war-warhammer-iii|Total War: WARHAMMER III
@@ -813,14 +813,14 @@ concrete-jungle|Concrete Jungle
 tails-of-iron|Tails of Iron
 rebuild-3-gangs-of-deadsville|Rebuild 3: Gangs of Deadsville
 order-of-battle-world-war-ii|Order of Battle: World War II
-lego-builders-journey|LEGO Builder�s Journey
+lego-builders-journey|LEGO Builder's Journey
 7-billion-humans|7 Billion Humans
 blackhole|BLACKHOLE
 judgment-2|Judgment (2019)
 west-of-loathing|West of Loathing
 super-rude-bear-resurrection|Super Rude Bear Resurrection
 mega-man-x-legacy-collection|Mega Man X Legacy Collection
-pokemon-legends-arceus|Pok�mon Legends: Arceus
+pokemon-legends-arceus|Pokémon Legends: Arceus
 ender-lilies-quietus-of-the-knights|Ender Lilies: Quietus of the Knights
 monument-valley-2|Monument Valley 2
 trials-rising|Trials Rising
@@ -841,7 +841,7 @@ what-the-golf|What the Golf?
 heroes-of-the-storm|Heroes of the Storm
 monster-slayers|Monster Slayers
 tetris-99|Tetris 99
-scott-pilgrim-vs-the-world-the-game-complete-editi|Scott Pilgrim vs. The World: The Game � Complete Edition
+scott-pilgrim-vs-the-world-the-game-complete-editi|Scott Pilgrim vs. The World: The Game - Complete Edition
 pistol-whip|Pistol Whip
 ys-viii-lacrimosa-of-dana|Ys VIII: Lacrimosa of DANA
 magic-the-gathering-arena|Magic: The Gathering Arena
@@ -1071,7 +1071,7 @@ nhl-21|NHL 21
 kingdom-hearts-dream-drop-distance|Kingdom Hearts 3D: Dream Drop Distance HD
 boomerang-x-2|Boomerang X
 wild-guns-reloaded|Wild Guns Reloaded
-knights-of-honor-ii-sovereign|Knights of Honor II � Sovereign
+knights-of-honor-ii-sovereign|Knights of Honor II - Sovereign
 airborne-kingdom|Airborne Kingdom
 ittle-dew-2|Ittle Dew 2
 final-fantasy-xiv-heavensward|Final Fantasy XIV: Heavensward
@@ -1098,7 +1098,7 @@ digimon-survive|Digimon Survive
 rungunjumpgun|RunGunJumpGun
 nhl-20|NHL 20
 fateextella-link|Fate/Extella Link
-new-pokemon-snap|New Pok�mon Snap
+new-pokemon-snap|New Pokémon Snap
 alone-with-you|Alone With You
 lovely-planet-arcade|Lovely Planet Arcade
 astalon-tears-of-the-earth|Astalon: Tears of the Earth
@@ -1148,7 +1148,7 @@ persona-q2-new-cinema-labyrinth|Persona Q2: New Cinema Labyrinth
 iracing|iRacing
 tadpole-treble|Tadpole Treble
 mlb-the-show-20|MLB The Show 20
-pokken-tournament-dx|Pokk�n Tournament DX
+pokken-tournament-dx|Pokkén Tournament DX
 fallout-4-far-harbor|Fallout 4 - Far Harbor
 demeo|Demeo
 ufc-4|UFC 4
@@ -1216,23 +1216,23 @@ mail-mole|Mail Mole
 shadows-of-adam|Shadows of Adam
 bokida-heartfelt-reunion|Bokida - Heartfelt Reunion
 battlefield-1-in-the-name-of-the-tsar|Battlefield 1: In The Name Of The Tsar
-pokken-tournament|Pokk�n Tournament
+pokken-tournament|Pokkén Tournament
 will-you-snail|Will You Snail?
 mythic-ocean|Mythic Ocean
 fantasian|Fantasian
 creepy-castle|Creepy Castle
 ever-oasis|Ever Oasis
-vietnam-65|Vietnam �65
+vietnam-65|Vietnam '65
 marvels-spider-man-the-city-that-never-sleeps|Marvel's Spider-Man: The City that Never Sleeps
 voez|VOEZ
 breakneck|Breakneck
 falcon-40|Falcon 4.0
 aliens-go-home-run|Aliens Go Home Run
-danganronpa-12-reload|Danganronpa 1�2 Reload
+danganronpa-12-reload|Danganronpa 1-2 Reload
 the-girl-of-glass-a-summer-birds-tale|The Girl of Glass: A Summer Bird's Tale
 wayward-strand|Wayward Strand
 mario-luigi-bowsers-inside-story-bowser-jrs-journe|Mario & Luigi: Bowser's Inside Story + Bowser Jr's Journey
-borderlands-3-moxxis-heist-of-the-handsome-jackpot|Borderlands 3: Moxxi�s Heist of the Handsome Jackpot
+borderlands-3-moxxis-heist-of-the-handsome-jackpot|Borderlands 3: Moxxi's Heist of the Handsome Jackpot
 card-crawl|Card Crawl
 ticket-to-earth|Ticket to Earth
 far-cry-3-classic-edition-2|Far Cry 3: Classic Edition
@@ -1292,7 +1292,7 @@ yo-kai-watch-3|Yo-kai Watch 3
 agent-a|Agent A
 mario-kart-live-home-circuit|Mario Kart Live: Home Circuit
 dont-starve-pocket-edition|Don't Starve: Pocket Edition
-the-crown-tundra|Pok�mon Sword and Shield: The Crown Tundra
+the-crown-tundra|Pokémon Sword and Shield: The Crown Tundra
 etrian-mystery-dungeon|Etrian Mystery Dungeon
 labyrinth-of-galleria-coven-of-dusk|Labyrinth of Galleria: The Moon Society
 the-climb-2-2|The Climb 2
@@ -1331,7 +1331,7 @@ franchise-hockey-manager-2|Franchise Hockey Manager 2
 nintendo-labo-toy-con-variety-kit|Nintendo Labo Toy-Con: Variety Kit
 titanfall-assault|Titanfall: Assault
 world-of-warships-blitz-mmo|World of Warships Blitz
-nierautomatatm-3c3c1d119440927|NieR:Automata� - 3C3C1D119440927
+nierautomatatm-3c3c1d119440927|NieR:Automata™ - 3C3C1D119440927
 chronos|Chronos
 dont-starve-nintendo-switch-edition|Don't Starve: Nintendo Switch Edition
 typeshift|TypeShift
